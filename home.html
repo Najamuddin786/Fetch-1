@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+<body style="text-align: center;">
+    <h2>Fetch Movie Details</h2>
+    <div><input type="text" name="" id="input"><button onclick="fun()">Search</button></div>
+    <div id="movie"></div>
+    
+</body>
+<script>
+    let a=0;
+    function fun(){
+        
+        let name=document.getElementById('input').value;
+    fetch(`https://www.omdbapi.com/?apikey=a3cc1d9e&t=${name}`)
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        let layout=document.createElement('div');
+            layout.innerHTML=`<img width="22%" style="padding : 15px" src=${data["Poster"]}> 
+            <h3>Move : ${data["Title"]}</h3>
+            <h4>Released : ${data["Released"]}</h4>
+            <h4>Writer : ${data["Writer"]}</h4>
+            <h4>imdbRating: ${data["imdbRating"]}</h4>
+            <h4>Runtime : ${data["Runtime"]}</h4>
+            <h4>BoxOffice : ${data["BoxOffice"]}</h4>
+            `
+
+
+        let ass=document.getElementById('movie');
+            ass.innerHTML="";
+           
+
+        ass.appendChild(layout)
+        
+    })
+    .catch(error =>{console.log("Eroor")})
+
+
+    }
+</script>
+    
+</html>
